@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regiões</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">    
+</head>
+<body>
+	<div th:replace="layout/header :: headerFragment"></div>
+	<div th:replace="layout/menu :: menuFragment"></div>
+
+	<div id="content">
+    <div class="container">
+        <h3>Listagem de Regiões</h3>
+        
+        <a href="regioes/add" class="btn-sm btn-primary"><i class="fas fa-plus"></i></a>
+        
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Região</th>                
+                    <th>País</th>    
+                    <th>Ações</th>                                 
+                </tr>
+            </thead>
+            <tbody>
+               <tr th:each="regiao : ${regioes}">
+               		<td th:text="${regiao.id}"></td>
+                   	<td th:text="${regiao.nome}"></td>
+                   	<td th:text="${regiao.pais != null ?  regiao.pais.nome : '--' }"></td>                   	
+                   	<td>
+                   		<a class="btn-sm btn-primary" th:href="@{/regioes/update/{id}(id=${regiao.id})}">Editar</a>
+	                   	<a class="btn-sm btn-danger" th:href="@{/regioes/delete/{id}(id=${regiao.id})}">Excluir</a>
+                   	</td>               
+               </tr>       
+            </tbody>
+        </table>
+        
+    </div>
+	</div>
+    
+    <div th:replace="layout/footer :: footerFragment"></div>
+</body>
+</html>
